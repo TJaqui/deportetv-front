@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs';
 
-export default function PostWithLike() {
+export default function PageCard() {
   const [liked, setLiked] = useState(false);
 
   return (

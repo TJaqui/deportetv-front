@@ -49,7 +49,7 @@ const Header = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.200", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box mr="5">Logo</Box>
           <Center>
