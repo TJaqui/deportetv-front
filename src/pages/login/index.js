@@ -19,6 +19,7 @@ function Login() {
       password: data.password,
       callbackUrl:"/"
     })
+    console.log(status)
     if(status.ok){
       router.push(status.url)
     }

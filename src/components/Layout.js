@@ -1,10 +1,10 @@
 import Head from "next/head"
 import Header from "./Header"
-
+import Footer from "./Footer"
 
 const Layout = ({ children, pagina}) => {
   return (
-    <div>
+    <>
       <Head>
         <title>DeportesTV - {pagina}</title>
         <meta name=" descripcion" content="Sitio Web para ver tus estadisticas de Futbol" />
@@ -13,8 +13,8 @@ const Layout = ({ children, pagina}) => {
       <Header />
 
       {children}
-
-    </div>
+      <Footer/>
+    </>
   )
 }
 

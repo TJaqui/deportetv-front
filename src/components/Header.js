@@ -1,90 +1,115 @@
-import Link from "next/link";
 import styles from "../styles/Header.module.css";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { ReactNode } from "react";
+import {
+  Box,
+  Flex,
+  Link,
+  Avatar,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+  Spacer,
+  useColorMode,
+  Center,
+} from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import Searcher from "./Searcher";
+
+const NavLink = ({ children }) => (
+  <Link
+    px={2}
+    py={1}
+    rounded={"md"}
+    _hover={{
+      textDecoration: "none",
+      bg: useColorModeValue("gray.200", "gray.700"),
+    }}
+    href={"#"}
+  >
+    {children}
+  </Link>
+);
+
 const Header = (props) => {
   const router = useRouter();
-  const session = useSession()
-  function handleSignOut(){
-    signOut()
+  const { data: session, status } = useSession();
+  console.log(session);
+  function handleSignOut() {
+    signOut();
   }
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <header className={styles.header}>
-      <div className="contenedor">
-        <div></div>
-        <nav>
-          <Box w="100vw" h="75px" boxShadow="xl" color="white" bgColor={"blue.300"}>
-            <Flex align={"center"} justify={"center"} >
-              <Box
-                borderX={"1px solid white"}
-                h="75px"
-                minW="7%"
-                type="button"
-                onClick={() => router.push("/")}
-                p="15"
-              >
-                Inicio
-              </Box>
-              <Box
-                borderRight={"1px solid white"}
-                h="75px"
-                minW="7%"
-                type="button"
-                onClick={() => router.push("/partidos")}
-                p="15"
-              >
-                Partidos
-              </Box>
-              <Box
-                borderRight={"1px solid white"}
-                h="75px"
-                minW="7%"
-                type="button"
-                onClick={() => router.push("/jugadores")}
-                p="15"
-              >
-                Jugadores
-              </Box>
-              <Box
-                borderRight={"1px solid white"}
-                h="75px"
-                minW="7%"
-                type="button"
-                onClick={() => router.push("/championships")}
-                p="15"
-              >
-                Competencias
-              </Box>
-              <Spacer/>
-              {!session &&  
-              <Box
-                borderRight={"1px solid white"}
-                h="75px"
-                w="7%"
-                type="button"
-                onClick={() => router.push("/login")}
-                p="15"
-              >
-                Iniciar sesión
-              </Box>}
-              {session && (<Box
-                borderRight={"1px solid white"}
-                h="75px"
-                minW="7%"
-                type="button"
-                onClick={handleSignOut}
-                p="15"
-              >
-                Cerrar session
-              </Box>)}
-             
-            </Flex>
+    <>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <Box mr="5">Logo</Box>
+          <Center>
+          <Searcher/>
+          </Center>
+          <Flex alignItems={"center"}>
+          
+            <Stack direction={"row"} spacing={7}>
+              <Button onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              </Button>
+              
+              {session && (
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Avatar
+                      size={"sm"}
+                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    />
+                  </MenuButton>
+                  <MenuList alignItems={"center"}>
+                    <br />
+                    <Center>
+                      <Avatar
+                        size={"2xl"}
+                        src={
+                          "https://avatars.dicebear.com/api/male/username.svg"
+                        }
+                      />
+                    </Center>
+                    <br />
+                    <Center>
+                      <p>
+                        {session.user.email}
+                      </p>
+                    </Center>
+                    <br />
+                    <MenuDivider />
 
-          </Box>
-        </nav>
-      </div>
-    </header>
+                    <MenuItem>
+                      <Box type="button" onClick={handleSignOut}>
+                        Cerrar session
+                      </Box>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              )}
+            </Stack>
+          </Flex>
+        </Flex>
+      </Box>
+
+     
+    </>
   );
 };
 
