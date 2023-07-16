@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import Footer from "@/components/Footer";
 import Partido from "@/components/Partido";
 
-const Partidos = ({ data }) => {
+const Partidos = () => {
 
   return (
   <><Layout
