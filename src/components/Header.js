@@ -41,7 +41,7 @@ const NavLink = ({ children }) => (
 const Header = (props) => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log(session);
+  console.log(session)
   function handleSignOut() {
     signOut();
   }
