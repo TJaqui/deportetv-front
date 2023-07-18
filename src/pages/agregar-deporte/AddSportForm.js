@@ -46,22 +46,22 @@ function AddSportForm() {
                   image:data.imageM,
                   description: data.descriptionM,
                   title: data.titleM,
-                  slug: data.slugM
+                  slug: "teams"
                 },
                 championship:{
                   image:data.imageC,
                   description: data.descriptionC,
                   title: data.titleC,
-                  slug: data.slug
+                  slug: "championships"
                 }
               }
             })
     }
-    await fetch('http://127.0.0.1:2021/api/registro-deporte',options).then(res=>res.json())
+    await fetch(`${process.env.NEXT_PUBLIC_BACK}/api/registro-deporte`,options).then(res=>res.json())
     .then((result) => {if(result.message === "deporte registrado"){router.push("/")} })
     toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
+      title: "Deporte creado",
+      description: "",
       status: "success",
       duration: 3000,
       isClosable: true,
@@ -246,37 +246,6 @@ function AddSportForm() {
         )}
         </FormControl>
 
-        <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-          <FormLabel
-            htmlFor="postal_code"
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-            mt="2%"
-          >
-            Direccion
-          </FormLabel>
-          <Input
-            type="text"
-            name="postal_code"
-            id="postal_code"
-            autoComplete="postal-code"
-            focusBorderColor="brand.400"
-            shadow="sm"
-            size="sm"
-            w="full"
-            rounded="md"
-            {...register("slug",{required:true})}
-          />
-            {errors.slug?.type === "required" && (
-          <Box textAlign="left" color="red" fontSize="xs">
-            Campo requerido
-          </Box>
-        )}
-        </FormControl>
         </>
       ) }
       {step === 2 &&(
@@ -384,37 +353,6 @@ function AddSportForm() {
         )}
         </FormControl>
 
-        <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
-          <FormLabel
-            htmlFor="postal_code"
-            fontSize="sm"
-            fontWeight="md"
-            color="gray.700"
-            _dark={{
-              color: "gray.50",
-            }}
-            mt="2%"
-          >
-            Direccion
-          </FormLabel>
-          <Input
-            type="text"
-            name="postal_code"
-            id="postal_code"
-            autoComplete="postal-code"
-            focusBorderColor="brand.400"
-            shadow="sm"
-            size="sm"
-            w="full"
-            rounded="md"
-            {...register("slugM",{required:true})}
-          />
-            {errors.slugM?.type === "required" && (
-          <Box textAlign="left" color="red" fontSize="xs">
-            Campo requerido
-          </Box>
-        )}
-        </FormControl>
         </>
       ) }
        

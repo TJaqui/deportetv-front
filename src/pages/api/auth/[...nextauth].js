@@ -12,7 +12,7 @@ export default NextAuth({
           error: "connection faiiles";
         });
         
-      const auth =  await axios.post('http://127.0.0.1:2021/api/autenticar',
+      const auth =  await axios.post(`${process.env.NEXT_PUBLIC_BACK}/api/autenticar`,
       {email: credentials.email, 
       password: credentials.password})
         .then(function (response) {

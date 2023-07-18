@@ -3,6 +3,7 @@ import { Box, Input, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { signIn, getSession} from "next-auth/react"
 import { useRouter } from "next/router";
+import { useToast } from "@chakra-ui/react";
 
 function Login() {
   const {
@@ -12,6 +13,7 @@ function Login() {
     formState: { errors },
   } = useForm();
   const router = useRouter()
+  const toast = useToast()
   const onSubmit = async (data) =>{
     const status = await signIn('credentials',{
       redirect:false,
@@ -22,6 +24,21 @@ function Login() {
     console.log(status)
     if(status.ok){
       router.push(status.url)
+      toast({
+        title: "Sesion iniciada",
+        description: "",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }else{
+      toast({
+        title: "Fallo al iniciar sesion usuario y/o contraseña incorrectos",
+        description: "",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   } 
   
