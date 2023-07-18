@@ -1,5 +1,4 @@
-import styles from "../styles/Header.module.css";
-import { ReactNode } from "react";
+
 import {
   Box,
   Flex,
@@ -17,8 +16,11 @@ import {
   Spacer,
   useColorMode,
   Center,
+  Heading,
+  IconButton, 
+  HStack
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import Searcher from "./Searcher";
@@ -38,6 +40,8 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
+const Links = ['Competencias', 'Equipos', 'Jugadores'];
+
 const Header = (props) => {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -45,13 +49,33 @@ const Header = (props) => {
   function handleSignOut() {
     signOut();
   }
+
+
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.200", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box mr="5">Logo</Box>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <Box><Heading fontSize= "25px">DeporteTv</Heading></Box>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', md: 'flex' }}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </HStack>
+          </HStack>
           <Center>
           <Searcher/>
           </Center>
@@ -116,9 +140,17 @@ const Header = (props) => {
             </Stack>
           </Flex>
         </Flex>
+        
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
-
-     
     </>
   );
 };

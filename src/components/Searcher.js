@@ -1,4 +1,3 @@
-import React from "react";
 import {
   InputGroup,
   InputRightElement,
@@ -24,5 +23,7 @@ function Searcher() {
     </Box>
   );
 }
+
+
 
 export default Searcher;

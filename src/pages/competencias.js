@@ -7,7 +7,7 @@ const competencias = () => {
       pagina="Competencias">
       <h1>Competencias</h1>
     </Layout>
-    <Footer /></>
+    </>
   )
 }
 

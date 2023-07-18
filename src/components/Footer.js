@@ -71,10 +71,10 @@ function Footer() {
         align={'center'}>
         <Logo />
         <Stack direction={'row'} spacing={6}>
-          <Link href={'#'}>Home</Link>
-          <Link href={'#'}>About</Link>
-          <Link href={'#'}>Blog</Link>
-          <Link href={'#'}>Contact</Link>
+          <Link href={'#'}>Inicio</Link>
+          <Link href={'#'}>Competencias</Link>
+          <Link href={'#'}>Equipos</Link>
+          <Link href={'#'}>Jugadores</Link>
         </Stack>
       </Container>
 
@@ -90,7 +90,7 @@ function Footer() {
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}>
-          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Text>© 2023 DeporteTV. Todos los derechos reservados</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'#'}>
               <FaTwitter />
