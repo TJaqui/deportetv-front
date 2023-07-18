@@ -11,7 +11,7 @@ function Sport(props) {
   const sportArr = [props.sports.section.match, props.sports.section.championship]
   const router = useRouter();
   return (
-    <Layout pagina="deporte">
+    <Layout pagina="teams">
       <Box as='button' onClick={()=>router.push("/")} ml="6" mt="6">
         <Icon as={BsArrowLeftCircle} boxSize={12}/>
       </Box>

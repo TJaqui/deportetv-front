@@ -41,6 +41,7 @@ export default NextAuth({
       },
     }),
   ],
+  secret: process.env.SECRET,
   callbacks: {
     jwt({ token, user }) {
       if(user) token.role = user.role
