@@ -27,6 +27,7 @@ import {
           pos={'relative'}
           zIndex={0}
           onClick={()=>router.push(`/deporte/${data.name}`)}
+          cursor={'pointer'}
           >
           <Box
             rounded={'lg'}

@@ -1,4 +1,3 @@
-
 import {
   Box,
   Flex,
@@ -17,8 +16,8 @@ import {
   useColorMode,
   Center,
   Heading,
-  IconButton, 
-  HStack
+  IconButton,
+  HStack,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
@@ -40,7 +39,7 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-const Links = ['Competencias', 'Equipos', 'Jugadores'];
+const Links = ["Competencias", "Equipos", "Jugadores"];
 
 const Header = (props) => {
   const router = useRouter();
@@ -50,8 +49,6 @@ const Header = (props) => {
     signOut();
   }
 
-
-
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -59,33 +56,39 @@ const Header = (props) => {
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
-            size={'md'}
+            size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={'center'}>
-            <Box><Heading fontSize= "25px">DeporteTv</Heading></Box>
+          <HStack spacing={8} alignItems={"center"}>
+            <Box
+              as="button"
+              onClick={() => router.push("/")}
+              cursor={"pointer"}
+            >
+              <Heading fontSize="25px">DeporteTv</Heading>
+            </Box>
             <HStack
-              as={'nav'}
+              as={"nav"}
               spacing={4}
-              display={{ base: 'none', md: 'flex' }}>
+              display={{ base: "none", md: "flex" }}
+            >
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
             </HStack>
           </HStack>
           <Center>
-          <Searcher/>
+            <Searcher />
           </Center>
           <Flex alignItems={"center"}>
-          
             <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
-              
+
               {session && (
                 <Menu>
                   <MenuButton
@@ -112,19 +115,20 @@ const Header = (props) => {
                     </Center>
                     <br />
                     <Center>
-                      <p>
-                        {session.user.email}
-                      </p>
+                      <p>{session.user.email}</p>
                     </Center>
                     <br />
                     <MenuDivider />
                     <MenuItem>
-                      <Box type="button" onClick={()=>router.push("/signup")}>
+                      <Box type="button" onClick={() => router.push("/signup")}>
                         Registrar usuarios
                       </Box>
                     </MenuItem>
                     <MenuItem>
-                      <Box type="button" onClick={()=>router.push("/agregar-deporte")}>
+                      <Box
+                        type="button"
+                        onClick={() => router.push("/agregar-deporte")}
+                      >
                         Agregar deporte
                       </Box>
                     </MenuItem>
@@ -140,10 +144,10 @@ const Header = (props) => {
             </Stack>
           </Flex>
         </Flex>
-        
+
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
