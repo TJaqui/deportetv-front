@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connecMongo from "../../../../database/conn";
-
+import axios from "axios";
 
 export default NextAuth({
   providers: [
@@ -11,7 +11,18 @@ export default NextAuth({
         connecMongo().catch((error) => {
           error: "connection faiiles";
         });
-        const result = await fetch("http://127.0.0.1:2021/api/registro",{email: credentials.email, password:credentials.password})
+        
+      const auth =  await axios.post('http://127.0.0.1:2021/api/autenticar',
+      {email: credentials.email, 
+      password: credentials.password})
+        .then(function (response) {
+          return response.data.user
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      return auth
+    
         
         /*const result = await Users.findOne({ email: credentials.email });
         if (!result) {
@@ -24,7 +35,7 @@ export default NextAuth({
         if(!checkPassword || result.email !== credentials.email){
             throw new Error("username or password dosen't match")
         }*/
-        return result;
+        
       },
     }),
   ],

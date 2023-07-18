@@ -1,9 +1,9 @@
 import Layout from '@/components/Layout'
 import Partido from '@/components/Partido'
-import { Box, Button, Card, CardBody, CardHeader, Collapse, Container, Divider, Fade, HStack, Heading, SimpleGrid, Slide, Spacer, Text, transition, useColorModeValue, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Card, CardBody, CardHeader, Collapse, Container, Divider, Fade, HStack, Heading, SimpleGrid, Slide, Spacer, transition, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { FaFilter } from "react-icons/fa"
 
-const jugadores = ({ entradas }) => {
+const Teams = ({ entradas }) => {
   
   const equipos = entradas.data.teams
   const { isOpen, onToggle } = useDisclosure()
@@ -15,23 +15,23 @@ const jugadores = ({ entradas }) => {
       <HStack alignItems={'center'}>
         <Heading alignContent="left" p= "10px" pt = "5px">Mas populares</Heading>
         <Spacer />
-        <Button onClick={onToggle} rightIcon = {<FaFilter />} colorScheme = "gray" variant = "solid">
+        <Button rightIcon = {<FaFilter />} colorScheme = "gray" variant = "solid">
           Filtrar
         </Button>
-        <Collapse  in ={isOpen} animateOpacity>
+        <Slide direction = 'bottom' in ={isOpen} style={{ zIndex :10 }}>
           <Box 
             p='40px'
             mt= '4'
-            bg="gray.300"
+            bg="gray.500"
             rounded="md"
             shadow="md">
-              <Filter />
+              xd
             </Box>
-        </Collapse>
+        </Slide>
       </HStack>  
       
       <Divider mb = "20px" />
-        <SimpleGrid spacing= {10} pb= "20px" minChildWidth = "250px">
+        <SimpleGrid columns = {3} spacing= {10} pb= "20px">
         
         {equipos.map(d => (
           <Partido
@@ -62,4 +62,4 @@ export async function getStaticProps(){
   }
 }
 
-export default jugadores
+export default Teams
