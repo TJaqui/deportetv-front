@@ -47,7 +47,7 @@ const jugadores = ({ entradas }) => {
   )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const key = 'W8TPhcJoRlIJMdLT'
   const secret = 'vik7dkDKOq1Q7TU41OTj0CIRYqBLDmF9'
   const url = 'https://livescore-api.com/api-client/teams/list.json?key=W8TPhcJoRlIJMdLT&secret=vik7dkDKOq1Q7TU41OTj0CIRYqBLDmF9&size=100&country_id=43'
