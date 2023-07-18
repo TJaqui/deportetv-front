@@ -16,11 +16,13 @@ export default NextAuth({
       {email: credentials.email, 
       password: credentials.password})
         .then(function (response) {
+          console.log(response.data.user)
           return response.data.user
         })
         .catch(function (error) {
           console.log(error);
         });
+        console.log(auth)
       return auth
     
         
@@ -39,4 +41,14 @@ export default NextAuth({
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if(user) token.role = user.role
+      return token
+    },
+    session({ session, token }) {
+      session.user.role = token.role
+      return session
+    }
+  }
 });
