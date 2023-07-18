@@ -13,7 +13,7 @@ function Sport(props) {
   return (
     <Layout pagina="teams">
       <Box as='button' onClick={()=>router.push("/")} ml="6" mt="6">
-        <Icon as={BsArrowLeftCircle} boxSize={12}/>
+        <Icon as={BsArrowLeftCircle} boxSize={11}/>
       </Box>
       <Center>
         <Box maxW={"80%"} justify="center">
