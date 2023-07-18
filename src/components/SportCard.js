@@ -25,7 +25,7 @@ import {
           boxShadow={'2xl'}
           rounded={'lg'}
           pos={'relative'}
-          zIndex={1}
+          zIndex={0}
           onClick={()=>router.push(`/deporte/${data.name}`)}
           >
           <Box

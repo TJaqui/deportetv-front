@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 function Sport(props) {
-  
+  console.log(process.env.BACK_URL)
   const sportArr = [props.sports.section.match, props.sports.section.championship]
   return (
     <Layout pagina="deporte">
@@ -29,8 +29,8 @@ export async function getServerSideProps({ req, params}) {
   
   const session = await getSession({ req });
   let sports;
-  const sportResponse = await axios
-    .get("http://127.0.0.1:2021/api/sports")
+   await axios
+    .get(`${process.env.NEXT_PUBLIC_BACK}/api/sports`)
     .then(function (response) {
       for (let i in response.data){
         if(response.data[i].name === slug)

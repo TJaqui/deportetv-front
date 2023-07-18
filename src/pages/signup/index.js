@@ -3,7 +3,7 @@ import { Box, Button, Input, Select } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
+import { useToast } from "@chakra-ui/react";
 function SingUp() {
   const {
     register,
@@ -12,9 +12,9 @@ function SingUp() {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  let rol;
-  const { data: session } = useSession();
 
+  const { data: session } = useSession();
+  const toast = useToast()
   const onSubmit = async (data) => {
     if (data.role === undefined || data.role === null) {
       data.role = "member";
@@ -31,10 +31,17 @@ function SingUp() {
         role: data.role,
       }),
     };
-    await fetch("http://127.0.0.1:2021/api/registro", options)
+    await fetch(`${process.env.NEXT_PUBLIC_BACK}/api/registro`, options)
       .then((res) => res.json())
       .then((result) => {
         if (result) {
+          toast({
+            title: "Usuario registrado",
+            description: "",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
           router.push("/login");
         }
       });
@@ -135,6 +142,14 @@ function SingUp() {
         <Button type="submit" colorScheme="blue" mt="4">
           Registrate
         </Button>
+        
+        <Box mt="4">
+          Si ya tienes cuenta inicia sesión{" "}
+          <Box as="a" href="/signup" color="blue">
+            {" "}
+            iniciar sesion
+          </Box>
+        </Box>
       </Box>
     </Box>
   );

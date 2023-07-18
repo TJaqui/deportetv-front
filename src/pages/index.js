@@ -57,7 +57,7 @@ export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   let sports;
   const sportResponse = await axios
-    .get("http://127.0.0.1:2021/api/sports")
+    .get(`${process.env.NEXT_PUBLIC_BACK}/api/sports`)
     .then(function (response) {
       sports = response.data;
     })
