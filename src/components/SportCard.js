@@ -9,9 +9,10 @@ import {
   } from '@chakra-ui/react';
   import { useRouter } from 'next/router';
   const IMAGE =
-    'https://images.unsplash.com/photo-1518051870910-a46e30d9db16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80';
+    'https://img.freepik.com/fotos-premium/estadio-futbol-gradas-llenas-fanaticos-esperando-juego-nocturno_207634-2644.jpg?w=740';
   
-  export default function SportCard() {
+  export default function SportCard({data}) {
+    
     const router = useRouter()
     return (
       <Center py={12}>
@@ -25,7 +26,7 @@ import {
           rounded={'lg'}
           pos={'relative'}
           zIndex={1}
-          onClick={()=>router.push('/deporte/futbol')}
+          onClick={()=>router.push(`/deporte/${data.name}`)}
           >
           <Box
             rounded={'lg'}
@@ -40,7 +41,7 @@ import {
               pos: 'absolute',
               top: 5,
               left: 0,
-              backgroundImage: `url(${IMAGE})`,
+              backgroundImage: `url(${data.image})` || `url(${IMAGE})`,
               filter: 'blur(15px)',
               zIndex: -1,
             }}
@@ -54,22 +55,20 @@ import {
               height={230}
               width={282}
               objectFit={'cover'}
-              src={IMAGE}
+              src={data.image || IMAGE}
             />
           </Box>
           <Stack pt={10} align={'center'}>
-            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-              Brand
-            </Text>
+            
             <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-              Nice Chair, pink
+            {data.name}
             </Heading>
             <Stack direction={'row'} align={'center'}>
               <Text fontWeight={800} fontSize={'xl'}>
-                $57
+              
               </Text>
-              <Text textDecoration={'line-through'} color={'gray.600'}>
-                $199
+              <Text color={'gray.600'}>
+                {data.description}
               </Text>
             </Stack>
           </Stack>

@@ -10,10 +10,16 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs';
+import { useRouter } from 'next/router';
 
-export default function PageCard() {
+const IMAGE =
+'https://img.freepik.com/fotos-premium/estadio-futbol-gradas-llenas-fanaticos-esperando-juego-nocturno_207634-2644.jpg?w=740';
+
+
+export default function PageCard({data}) {
   const [liked, setLiked] = useState(false);
-
+  const router = useRouter();
+  console.log(router.query)
   return (
     <Center py={6}>
       <Box
@@ -29,7 +35,7 @@ export default function PageCard() {
         <Box h={'200px'} borderBottom={'1px'} borderColor="black">
           <Img
             src={
-              'https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+              data.image || IMAGE
             }
             roundedTop={'sm'}
             objectFit="cover"
@@ -47,18 +53,18 @@ export default function PageCard() {
             color="white"
             mb={2}>
             <Text fontSize={'xs'} fontWeight="medium">
-              React
+              --
             </Text>
           </Box>
           <Heading color={'black'} fontSize={'2xl'} noOfLines={1}>
-            React v18.0
+            {data.title}
           </Heading>
           <Text color={'gray.500'} noOfLines={2}>
-            In this post, we will give an overview of what is new in React 18,
-            and what it means for the future.
+            {data.description}
           </Text>
         </Box>
         <HStack borderTop={'1px'} color="black">
+          <Box onClick={()=>router.push(`/deporte/${router.query.slug}/${data.slug}`)}>
           <Flex
             p={4}
             alignItems="center"
@@ -71,19 +77,15 @@ export default function PageCard() {
             </Text>
             <BsArrowUpRight />
           </Flex>
+          </Box>
           <Flex
             p={4}
             alignItems="center"
             justifyContent={'space-between'}
             roundedBottom={'sm'}
             borderLeft={'1px'}
-            cursor="pointer"
-            onClick={() => setLiked(!liked)}>
-            {liked ? (
-              <BsHeartFill fill="red" fontSize={'24px'} />
-            ) : (
-              <BsHeart fontSize={'24px'} />
-            )}
+            >
+           
           </Flex>
         </HStack>
       </Box>
