@@ -46,7 +46,7 @@ function AddSportForm() {
                   image:data.imageM,
                   description: data.descriptionM,
                   title: data.titleM,
-                  slug: "teams"
+                  slug: "match"
                 },
                 championship:{
                   image:data.imageC,
