@@ -41,7 +41,7 @@ const NavLink = ({ children }) => (
 const Header = (props) => {
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log(session)
+
   function handleSignOut() {
     signOut();
   }
@@ -94,6 +94,16 @@ const Header = (props) => {
                     </Center>
                     <br />
                     <MenuDivider />
+                    <MenuItem>
+                      <Box type="button" onClick={()=>router.push("/signup")}>
+                        Registrar usuarios
+                      </Box>
+                    </MenuItem>
+                    <MenuItem>
+                      <Box type="button" onClick={()=>router.push("/agregar-deporte")}>
+                        Agregar deporte
+                      </Box>
+                    </MenuItem>
 
                     <MenuItem>
                       <Box type="button" onClick={handleSignOut}>
