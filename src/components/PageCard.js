@@ -19,7 +19,7 @@ const IMAGE =
 export default function PageCard({data}) {
   const [liked, setLiked] = useState(false);
   const router = useRouter();
-  console.log(router.query)
+
   return (
     <Center py={6}>
       <Box
