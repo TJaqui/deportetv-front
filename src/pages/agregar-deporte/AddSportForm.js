@@ -24,7 +24,7 @@ function AddSportForm() {
   const handleClick = () => setShow(cur => cur + 1);
   const toast = useToast();
   const [step, setStep] = useState(0);
-  const [progress, setProgress] = useState(33.333);
+  const [progress, setProgress] = useState(253);
   const router = useRouter();
   const {
     register,
@@ -53,6 +53,12 @@ function AddSportForm() {
                   description: data.descriptionC,
                   title: data.titleC,
                   slug: "championships"
+                },
+                team:{
+                  image:data.imageT,
+                  description: data.descriptionT,
+                  title: data.titleT,
+                  slug: "teams"
                 }
               }
             })
@@ -355,7 +361,113 @@ function AddSportForm() {
 
         </>
       ) }
-       
+        {step === 3 &&(
+          <>
+        <Heading w="100%" textAlign={"center"} fontWeight="normal" mb="2%">
+          Edita las secciones
+        </Heading>
+        <Box fontSize={20} fontWeight={600}>
+        Equipos
+        </Box>
+        <FormControl as={GridItem} colSpan={6}>
+          <FormLabel
+            htmlFor="street_address"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+            mt="2%"
+          >
+            Titulo 
+          </FormLabel>
+          
+          <Input
+            type="text"
+            name="street_address"
+            id="street_address"
+            autoComplete="street-address"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="full"
+            rounded="md"
+            {...register("titleT",{required:true})}
+          />
+            {errors.titleT?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Campo requerido
+          </Box>
+        )}
+        </FormControl>
+
+        <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
+          <FormLabel
+            htmlFor="city"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+            mt="2%"
+          >
+            Descripción
+          </FormLabel>
+          <Input
+            type="text"
+            name="city"
+            id="city"
+            autoComplete="city"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="full"
+            rounded="md"
+            {...register("descriptionT",{required:true})}
+          />
+            {errors.descriptionT?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Campo requerido
+          </Box>
+        )}
+        </FormControl>
+
+        <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
+          <FormLabel
+            htmlFor="state"
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+            mt="2%"
+          >
+            Imagen
+          </FormLabel>
+          <Input
+            type="text"
+            name="state"
+            id="state"
+            autoComplete="state"
+            focusBorderColor="brand.400"
+            shadow="sm"
+            size="sm"
+            w="full"
+            rounded="md"
+            {...register("imageT",{required:true})}
+          />
+            {errors.imageT?.type === "required" && (
+          <Box textAlign="left" color="red" fontSize="xs">
+            Campo requerido
+          </Box>
+        )}
+        </FormControl>
+
+        </>
+      ) }
        
         <ButtonGroup mt="5%" w="100%">
           <Flex w="100%" justifyContent="space-between">
@@ -363,7 +475,7 @@ function AddSportForm() {
               <Button
                 onClick={() => {
                   setStep(step - 1);
-                  setProgress(progress - 33.33);
+                  setProgress(progress - 25);
                 }}
                 isDisabled={step === 0}
                 colorScheme="teal"
@@ -375,13 +487,13 @@ function AddSportForm() {
               </Button>
               <Button
                 w="7rem"
-                isDisabled={step === 2}
+                isDisabled={step === 3}
                 onClick={() => {
                   setStep(step + 1);
                   if (step === 2) {
                     setProgress(100);
                   } else {
-                    setProgress(progress + 33.33);
+                    setProgress(progress + 25);
                   }
                 }}
                 colorScheme="teal"
@@ -390,7 +502,7 @@ function AddSportForm() {
                 Next
               </Button>
             </Flex>
-            {step === 2 ? (
+            {step === 3 ? (
               <Button
                 w="7rem"
                 colorScheme="red"

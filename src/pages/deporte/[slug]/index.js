@@ -7,13 +7,14 @@ import {BsArrowLeftCircle} from 'react-icons/bs'
 import { useRouter } from "next/router";
 
 function Sport(props) {
-  console.log(process.env.BACK_URL)
-  const sportArr = [props.sports.section.match, props.sports.section.championship]
+  console.log(props)
+
+  const sportArr = [props.sports.section.match, props.sports.section.championship, props.sports.section.team]
   const router = useRouter();
   return (
     <Layout pagina="teams">
       <Box as='button' onClick={()=>router.push("/")} ml="6" mt="6">
-        <Icon as={BsArrowLeftCircle} boxSize={11}/>
+        <Icon as={BsArrowLeftCircle} boxSize={16}/>
       </Box>
       <Center>
         <Box maxW={"80%"} justify="center">

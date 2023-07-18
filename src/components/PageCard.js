@@ -72,8 +72,8 @@ export default function PageCard({data}) {
             roundedBottom={'sm'}
             cursor={'pointer'}
             w="full">
-            <Text fontSize={'md'} fontWeight={'semibold'}>
-              View more
+            <Text fontSize={'md'} fontWeight={'semibold'} mr="2">
+              Ver más sobre {data.title}
             </Text>
             <BsArrowUpRight />
           </Flex>
