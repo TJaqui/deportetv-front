@@ -1,11 +1,12 @@
-import { Avatar, Card, CardBody, CardHeader, HStack, Heading, Spacer, Text, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, Card, CardBody, CardHeader, HStack, Heading, Spacer, Text, useColorModeValue } from "@chakra-ui/react"
 import syles from "../styles/Partido.module.css"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 function MatchPlayed ({ entrada }){
   
-  const { score, competition_name, location, events } = entrada //todos esos parametros 
- 
+  const { score, competition_name, location, events, id } = entrada //todos esos parametros 
+  const router = useRouter()
   //son segun este implementado en la base de datos para 
   //los MatchPlayeds 
   const styleCard = {      //Estilo para la presentacion de Equipos 
@@ -20,8 +21,8 @@ function MatchPlayed ({ entrada }){
   }
 
   return (
-    
-    <Card sx ={styleCard}>
+    <Box onClick={() => router.push(`/deporte/${router.query.slug}/championships/${router.query.id}/${id}`)} >
+        <Card sx ={styleCard}>
             <CardHeader>
               <HStack>
                 <Heading size = "md">{competition_name}</Heading>
@@ -34,6 +35,7 @@ function MatchPlayed ({ entrada }){
             <Text><Text as = 'b'>Estadio: </Text> {location}</Text> 
             </CardBody>
           </Card>
+          </Box>
   )
 }
 

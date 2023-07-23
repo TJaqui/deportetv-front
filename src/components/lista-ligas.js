@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { data } from "autoprefixer";
+import { Box } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const ListaLigas = () => {
   const [searchCountry, setSearchCountry] = useState("");
   const [objects, setObjects] = useState([]);
-
+  const router = useRouter()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,6 +59,7 @@ const ListaLigas = () => {
           </p>
         ) : (
           objects.map((object) => (
+            <Box onClick={()=>router.push(`/deporte/${router.query.slug}/championships/${object.id}`)}>
             <div
               key={object.id}
               className="flex flex-col w-[70%] h-[250px] border-slate-400 border-2 justify-self-center items-center justify-center hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-[1.1] rounded-lg"
@@ -73,6 +76,7 @@ const ListaLigas = () => {
                 {object.name}
               </h1>
             </div>
+            </Box>
           ))
         )}
       </div>
